@@ -1,129 +1,489 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love Message</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    min-height: 100vh;
-    background-color: ; /* Light gray background */
-  }
-  
-  #message {
-    position: absolute;
-    top: 2rem; /* Adjust the top position as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: red; /* Red text */
-    font-size: 12px;
-    line-height: 1.5; /* Adjust line spacing for better readability */
-    opacity: 1; /* Initially visible */
-    transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out; /* Transitions for both opacity and position */
-    background-color: #fff; /* White background */
-    border: 2px solid black; /* Black border */
-    padding: 1em; /* Add some padding for better readability */
-    max-width: 80%; /* Limit the maximum width of the message */
-    margin: 0 auto; /* Center the message horizontally */
-    z-index: 1; /* Ensure the message is displayed above the pictures */
-  }
-  
-  #slideshow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  #slideshow img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
-
-  #slideshow img.show {
-    opacity: 1;
-  }
-
-  #slideshow img.show {
-  opacity: 1;
-  }
-
-  @keyframes slideShow {
-    0% {
-      opacity: 0;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sammi Quiz</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      background-image: url('https://source.unsplash.com/random/?nature,landscape,water,sky,clouds');
+      background-size: cover;
+      background-position: center;
     }
-    8.33% {
-      opacity: 1;
+    .container {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    17.67% {
-      opacity: 1;
+    h1 {
+      color: #333;
+      text-align: center;
     }
-    25% {
-      opacity: 0;
+    .question {
+      margin-bottom: 20px;
     }
-    100% {
-      opacity: 0;
-	  }
-	0% {
-      opacity: 0;
+    .question h2 {
+      margin-bottom: 10px;
     }
-    8.33% {
-      opacity: 1;
+    label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      cursor: pointer;
     }
-    17.67% {
-      opacity: 1;
+    input[type="radio"] {
+      margin-right: 10px;
     }
-    25% {
-      opacity: 0;
+    .result {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #666;
     }
-    100% {
-      opacity: 0;
+    .correct {
+      color: #28a745; /* Green */
     }
-  }
-</style>
+    .incorrect {
+      color: #dc3545; /* Red */
+    }
+    .score {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: #28a745; /* Green */
+    }
+  </style>
 </head>
 <body>
-  <div id="message">
-    <h1>You always have me, Sammi. I love you always.</h1>
-  </div>
-  <div id="slideshow">
-    <img src="sammi.jpg" alt="Picture 1" class="show">
-    <img src="sammi 2.jpg" alt="Picture 2">
-    <img src="sammi 3.jpg" alt="Picture 3">
-	<img src="4.jpg" alt="Picture 4">
-	<img src="5.jpg" alt="Picture 5">
-	<img src="6.jpg" alt="Picture 6">
-	<img src="7.jpg" alt="Picture 7">
-	<img src="8.jpg" alt="Picture 8">
-  </div>
-  
-  <script>
-    const message = document.getElementById("message");
-    const slideshow = document.getElementById("slideshow");
-	window.onload = function() {
-  var slideshow = document.getElementById('slideshow');
-  var images = slideshow.getElementsByTagName('img');
-  var currentIndex = 0;
+<div class="container">
+  <h1>Quiz Time (rushed version hahahaha)</h1>
+  <form id="quizForm">
+    <!-- Question 1 -->
+    <div class="question" data-correct="a" data-message="A - Ayaw ko mag-isa lalo na't ikaw nalang ang mayron ako outside family, my last anchor in life.">
+      <h2>1. Ano ang biggest fear ko?</h2>
+      <label>
+        <input type="radio" name="q1" value="a">
+        a. Being alone
+      </label>
+      <label>
+        <input type="radio" name="q1" value="b">
+        b. Being overprotective
+      </label>
+      <label>
+        <input type="radio" name="q1" value="c">
+        c. Being left in the dark
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 2 -->
+    <div class="question" data-correct="abc" data-message="All are correct - Dahil you are the most beautiful person I've met, despite the flaws and mistakes you did.">
+      <h2>2. Gaano kaganda ang pagkatao mo?</h2>
+      <label>
+        <input type="radio" name="q2" value="a">
+        a. 100% maganda
+      </label>
+      <label>
+        <input type="radio" name="q2" value="b">
+        b. 200% maganda
+      </label>
+      <label>
+        <input type="radio" name="q2" value="c">
+        c. PINAKA maganda sa lahat
+      </label>
+      <div class="result"></div>
+    </div>
+   <!-- Question 3 -->
+    <div class="question" data-correct="a" data-message="a - Arf arf, walang kakagat sa baby ko, ako lang dapat">
+      <h2>3. Kung may hahabol sa iyo na aso at gusto kang kagatin, ano ang gagawin ko?</h2>
+      <label>
+        <input type="radio" name="q3" value="a">
+        a. Hahabulin ko ang mga aso at sila ang kakagatin ko
+      </label>
+      <label>
+        <input type="radio" name="q3" value="b">
+        b. Tatahol ng malakas para matakot sila
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 4 -->
+    <div class="question" data-correct="abc" data-message="All are correct - Dapat lang kamukha mo, kasi pangit me">
+      <h2>4. Kung ako ang magiging asawa mo, diba kamukha mo ang magiging anak natin?</h2>
+      <label>
+        <input type="radio" name="q4" value="a">
+        a. Oo
+      </label>
+      <label>
+        <input type="radio" name="q4" value="b">
+        b. Syempre naman
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 5 -->
+    <div class="question" data-correct="b" data-message="b - I'm glad you remember that! It was such a fun and random moment. I can't wait to create more memories with you.">
+      <h2>5. Nakalimutan mo na ba ang pinaka unang kwento natin?</h2>
+      <label>
+        <input type="radio" name="q5" value="a">
+        a. Oo, nakalimutan ko na
+      </label>
+      <label>
+        <input type="radio" name="q5" value="b">
+        b. Hindi, alam ko pa rin ang kwento na iyon
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 6 -->
+    <div class="question" data-correct="a" data-message="a - Yeah, I actually did one time hangga't makita ko una mong post and wala ka talaga shared noon dinelete mo talaga hahhahha.">
+      <h2>6. Nag scroll ako dati sa profile mo hanggang makita ko ang pinaka una mong post na profile picture</h2>
+      <label>
+        <input type="radio" name="q6" value="a">
+        a. Tama
+      </label>
+      <label>
+        <input type="radio" name="q6" value="b">
+        b. Mali
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 7 -->
+    <div class="question" data-correct="b" data-message="b - Yun yung ang time na parang nagpaprint ka the next day, nakalimutan ko na specifically pero like need mo makita ano itsura ata and then may assignment me na quiz and sabay ko sila ginagawa and buzzer beater ako sa quiz kasi nakapasa last 20-30 sec nalang ata hahahahha.">
+      <h2>7. Kahit 2 hours na lang at deadline na ng assignment ko, ano ginawa mo kasama ko na nag-aaral?</h2>
+      <label>
+        <input type="radio" name="q7" value="a">
+        a. Kumanta ng selos by shaira
+      </label>
+      <label>
+        <input type="radio" name="q7" value="b">
+        b. Ginawa ang isa mong assignment sa wordd
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 8 -->
+    <div class="question" data-correct="c"data-message="C - Ano pa ba magiging mas favorite ko kesa sa number ng birthdate ng pinakamahal ko?">
+      <h2>8. My favorite number</h2>
+      <label>
+        <input type="radio" name="q8" value="a">
+        a. 6
+      </label>
+      <label>
+        <input type="radio" name="q8" value="b">
+        b. 18
+      </label>
+      <label>
+        <input type="radio" name="q8" value="c">
+        c. 27
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 9 -->
+    <div class="question" data-correct="b" data-message="b - Like sobrang ganda mo nun diba sabi ko sayo nung nag stalk me. Pero naisip ko na bakit mo me chachat na random so that means naghahanap ka lang kausap. Yun naisip ko nun and yeah may pagkatama naman hula ko pero like ewan, everything clicked with those few messages.">
+      <h2>9. Ano ang first impression ko sayo?</h2>
+      <label>
+        <input type="radio" name="q9" value="a">
+        a. Madami agad ka chat
+      </label>
+      <label>
+        <input type="radio" name="q9" value="b">
+        b. Magandang dalaga na gustong may makausap
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 10 -->
+    <div class="question" data-correct="abc" data-message="All are correct - My beloved sammi, my number one sa lahat, my priority and yeah, I'll pretty much do anything for you. I'm sorry for all mistakes and stupidity I made, and I want to say that I love you so much.">
+      <h2>10. Sino ang pinaka mamahal kong babae sa lahat?</h2>
+      <label>
+        <input type="radio" name="q10" value="a">
+        a. Samantha Mhickaella Olea
+      </label>
+      <label>
+        <input type="radio" name="q10" value="b">
+        b. Mikay
+      </label>
+      <label>
+        <input type="radio" name="q10" value="c">
+        c. Sammi
+      </label>
+      <div class="result"></div>
+    </div>
+  </form>
+  <div class="score" id="score"></div>
+</div>
 
-  function showNextImage() {
-    images[currentIndex].classList.remove('show');
-    currentIndex = (currentIndex + 1) % images.length;
-    images[currentIndex].classList.add('show');
-  }
+<script>
+  const questions = document.querySelectorAll('.question');
+  const results = document.querySelectorAll('.result');
+  const scoreElement = document.getElementById('score');
+  let score = 0;
 
-  setInterval(showNextImage, 3200); // 3200ms = 32s
-}
-  </script>
+  questions.forEach((question, index) => {
+    question.addEventListener('change', (e) => {
+      const checkedInput = e.target.closest('input[type="radio"]');
+      const result = results[index];
+
+      if (checkedInput.checked) {
+        const answer = checkedInput.value;
+        const correctAnswer = question.dataset.correct;
+
+        if (answer === correctAnswer) {
+          result.classList.add('correct');
+          score++;
+        } else {
+          result.classList.add('incorrect');
+        }
+
+        result.textContent = question.dataset.message;
+      }
+    });
+  });
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sammi Quiz</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      background-image: url('https://source.unsplash.com/random/?nature,landscape,water,sky,clouds');
+      background-size: cover;
+      background-position: center;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question h2 {
+      margin-bottom: 10px;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    .result {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #666;
+    }
+    .correct {
+      color: #28a745; /* Green */
+    }
+    .incorrect {
+      color: #dc3545; /* Red */
+    }
+    .score {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: #28a745; /* Green */
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Quiz Time (rushed version hahahaha)</h1>
+  <form id="quizForm">
+    <!-- Question 1 -->
+    <div class="question" data-correct="a" data-message="A - Ayaw ko mag-isa lalo na't ikaw nalang ang mayron ako outside family, my last anchor in life.">
+      <h2>1. Ano ang biggest fear ko?</h2>
+      <label>
+        <input type="radio" name="q1" value="a">
+        a. Being alone
+      </label>
+      <label>
+        <input type="radio" name="q1" value="b">
+        b. Being overprotective
+      </label>
+      <label>
+        <input type="radio" name="q1" value="c">
+        c. Being left in the dark
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 2 -->
+    <div class="question" data-correct="abc" data-message="All are correct - Dahil you are the most beautiful person I've met, despite the flaws and mistakes you did.">
+      <h2>2. Gaano kaganda ang pagkatao mo?</h2>
+      <label>
+        <input type="radio" name="q2" value="a">
+        a. 100% maganda
+      </label>
+      <label>
+        <input type="radio" name="q2" value="b">
+        b. 200% maganda
+      </label>
+      <label>
+        <input type="radio" name="q2" value="c">
+        c. PINAKA maganda sa lahat
+      </label>
+      <div class="result"></div>
+    </div>
+   <!-- Question 3 -->
+    <div class="question" data-correct="a" data-message="a - Arf arf, walang kakagat sa baby ko, ako lang dapat">
+      <h2>3. Kung may hahabol sa iyo na aso at gusto kang kagatin, ano ang gagawin ko?</h2>
+      <label>
+        <input type="radio" name="q3" value="a">
+        a. Hahabulin ko ang mga aso at sila ang kakagatin ko
+      </label>
+      <label>
+        <input type="radio" name="q3" value="b">
+        b. Tatahol ng malakas para matakot sila
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 4 -->
+    <div class="question" data-correct="abc" data-message="All are correct - Dapat lang kamukha mo, kasi pangit me">
+      <h2>4. Kung ako ang magiging asawa mo, diba kamukha mo ang magiging anak natin?</h2>
+      <label>
+        <input type="radio" name="q4" value="a">
+        a. Oo
+      </label>
+      <label>
+        <input type="radio" name="q4" value="b">
+        b. Syempre naman
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 5 -->
+    <div class="question" data-correct="b" data-message="b - I'm glad you remember that! It was such a fun and random moment. I can't wait to create more memories with you.">
+      <h2>5. Nakalimutan mo na ba ang pinaka unang kwento natin?</h2>
+      <label>
+        <input type="radio" name="q5" value="a">
+        a. Oo, nakalimutan ko na
+      </label>
+      <label>
+        <input type="radio" name="q5" value="b">
+        b. Hindi, alam ko pa rin ang kwento na iyon
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 6 -->
+    <div class="question" data-correct="a" data-message="a - Yeah, I actually did one time hangga't makita ko una mong post and wala ka talaga shared noon dinelete mo talaga hahhahha.">
+      <h2>6. Nag scroll ako dati sa profile mo hanggang makita ko ang pinaka una mong post na profile picture</h2>
+      <label>
+        <input type="radio" name="q6" value="a">
+        a. Tama
+      </label>
+      <label>
+        <input type="radio" name="q6" value="b">
+        b. Mali
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 7 -->
+    <div class="question" data-correct="b" data-message="b - Yun yung ang time na parang nagpaprint ka the next day, nakalimutan ko na specifically pero like need mo makita ano itsura ata and then may assignment me na quiz and sabay ko sila ginagawa and buzzer beater ako sa quiz kasi nakapasa last 20-30 sec nalang ata hahahahha.">
+      <h2>7. Kahit 2 hours na lang at deadline na ng assignment ko, ano ginawa mo kasama ko na nag-aaral?</h2>
+      <label>
+        <input type="radio" name="q7" value="a">
+        a. Kumanta ng selos by shaira
+      </label>
+      <label>
+        <input type="radio" name="q7" value="b">
+        b. Ginawa ang isa mong assignment sa wordd
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 8 -->
+    <div class="question" data-correct="c"data-message="C - Ano pa ba magiging mas favorite ko kesa sa number ng birthdate ng pinakamahal ko?">
+      <h2>8. My favorite number</h2>
+      <label>
+        <input type="radio" name="q8" value="a">
+        a. 6
+      </label>
+      <label>
+        <input type="radio" name="q8" value="b">
+        b. 18
+      </label>
+      <label>
+        <input type="radio" name="q8" value="c">
+        c. 27
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 9 -->
+    <div class="question" data-correct="b" data-message="b - Like sobrang ganda mo nun diba sabi ko sayo nung nag stalk me. Pero naisip ko na bakit mo me chachat na random so that means naghahanap ka lang kausap. Yun naisip ko nun and yeah may pagkatama naman hula ko pero like ewan, everything clicked with those few messages.">
+      <h2>9. Ano ang first impression ko sayo?</h2>
+      <label>
+        <input type="radio" name="q9" value="a">
+        a. Madami agad ka chat
+      </label>
+      <label>
+        <input type="radio" name="q9" value="b">
+        b. Magandang dalaga na gustong may makausap
+      </label>
+      <div class="result"></div>
+    </div>
+    <!-- Question 10 -->
+    <div class="question" data-correct="abc" data-message="All are correct - My beloved sammi, my number one sa lahat, my priority and yeah, I'll pretty much do anything for you. I'm sorry for all mistakes and stupidity I made, and I want to say that I love you so much.">
+      <h2>10. Sino ang pinaka mamahal kong babae sa lahat?</h2>
+      <label>
+        <input type="radio" name="q10" value="a">
+        a. Samantha Mhickaella Olea
+      </label>
+      <label>
+        <input type="radio" name="q10" value="b">
+        b. Mikay
+      </label>
+      <label>
+        <input type="radio" name="q10" value="c">
+        c. Sammi
+      </label>
+      <div class="result"></div>
+    </div>
+  </form>
+  <div class="score" id="score"></div>
+</div>
+
+<script>
+  const questions = document.querySelectorAll('.question');
+  const results = document.querySelectorAll('.result');
+  const scoreElement = document.getElementById('score');
+  let score = 0;
+
+  questions.forEach((question, index) => {
+    question.addEventListener('change', (e) => {
+      const checkedInput = e.target.closest('input[type="radio"]');
+      const result = results[index];
+
+      if (checkedInput.checked) {
+        const answer = checkedInput.value;
+        const correctAnswer = question.dataset.correct;
+
+        if (answer === correctAnswer) {
+          result.classList.add('correct');
+          score++;
+        } else {
+          result.classList.add('incorrect');
+        }
+
+        result.textContent = question.dataset.message;
+      }
+    });
+  });
+</script>
 </body>
 </html>
